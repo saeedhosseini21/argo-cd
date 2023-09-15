@@ -1625,10 +1625,10 @@ func getObjsFromYAMLOrJson(logCtx *log.Entry, manifestPath string, filename stri
 		decoder := json.NewDecoder(reader)
 		err = decoder.Decode(&obj)
 		if err != nil {
-			return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", filename, err)
+			return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", manifestPath, err)
 		}
 		if decoder.More() {
-			return status.Errorf(codes.FailedPrecondition, "Found multiple objects in %q. Only single objects are allowed in JSON files.", filename)
+			return status.Errorf(codes.FailedPrecondition, "Found multiple objects in %q. Only single objects are allowed in JSON files.", manifestPath)
 		}
 		*objs = append(*objs, &obj)
 	} else {
@@ -1638,7 +1638,7 @@ func getObjsFromYAMLOrJson(logCtx *log.Entry, manifestPath string, filename stri
 				// If we get here, we had a multiple objects in a single YAML file which had some
 				// valid k8s objects, but errors parsing others (within the same file). It's very
 				// likely the user messed up a portion of the YAML, so report on that.
-				return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", filename, err)
+				return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", manifestPath, err)
 			}
 			// Read the whole file to check whether it looks like a manifest.
 			out, err := utfutil.ReadFile(manifestPath, utfutil.UTF8)
@@ -1646,7 +1646,7 @@ func getObjsFromYAMLOrJson(logCtx *log.Entry, manifestPath string, filename stri
 			if bytes.Contains(out, []byte("apiVersion:")) &&
 				bytes.Contains(out, []byte("kind:")) &&
 				bytes.Contains(out, []byte("metadata:")) {
-				return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", filename, err)
+				return status.Errorf(codes.FailedPrecondition, "Failed to unmarshal %q: %v", manifestPath, err)
 			}
 			// Otherwise, it might be an unrelated YAML file which we will ignore
 		}
