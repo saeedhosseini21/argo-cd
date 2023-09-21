@@ -1,6 +1,6 @@
 # Selective Sync
 
-A *selective sync* is one where only some resources are sync'd. You can choose which resources from the UI:
+A *selective sync* is one where only some resources are synced. You can choose which resources from the UI:
 
 ![selective sync](../assets/selective-sync.png)
 
