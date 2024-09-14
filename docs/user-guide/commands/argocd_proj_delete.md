@@ -1,9 +1,18 @@
+# `argocd proj delete` Command Reference
+
 ## argocd proj delete
 
 Delete project
 
 ```
 argocd proj delete PROJECT [flags]
+```
+
+### Examples
+
+```
+  # Delete the project with name PROJECT
+  argocd proj delete PROJECT
 ```
 
 ### Options
@@ -15,6 +24,7 @@ argocd proj delete PROJECT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

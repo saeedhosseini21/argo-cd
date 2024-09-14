@@ -1,9 +1,26 @@
+# `argocd admin app` Command Reference
+
 ## argocd admin app
 
 Manage applications configuration
 
 ```
 argocd admin app [flags]
+```
+
+### Examples
+
+```
+
+# Compare results of two reconciliations and print diff
+argocd admin app diff-reconcile-results APPNAME [flags]
+
+# Generate declarative config for an application
+argocd admin app generate-spec APPNAME
+
+# Reconcile all applications and store reconciliation summary in the specified file
+argocd admin app get-reconcile-results APPNAME
+
 ```
 
 ### Options
@@ -15,6 +32,7 @@ argocd admin app [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

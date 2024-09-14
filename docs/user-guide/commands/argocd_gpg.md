@@ -1,3 +1,5 @@
+# `argocd gpg` Command Reference
+
 ## argocd gpg
 
 Manage GPG keys used for signature verification
@@ -17,6 +19,7 @@ argocd gpg [flags]
       --client-key string              Path to a client key file for TLS
       --cluster string                 The name of the kubeconfig cluster to use
       --context string                 The name of the kubeconfig context to use
+      --disable-compression            If true, opt-out of response compression for all requests to the server
   -h, --help                           help for gpg
       --insecure-skip-tls-verify       If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
       --kubeconfig string              Path to a kube config. Only required if out-of-cluster
@@ -33,6 +36,7 @@ argocd gpg [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

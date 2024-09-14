@@ -1,3 +1,5 @@
+# `argocd admin cluster namespaces enable-namespaced-mode` Command Reference
+
 ## argocd admin cluster namespaces enable-namespaced-mode
 
 Enable namespaced mode for clusters which name matches to the specified pattern.
@@ -18,6 +20,7 @@ argocd admin cluster namespaces enable-namespaced-mode PATTERN [flags]
       --cluster string                 The name of the kubeconfig cluster to use
       --cluster-resources              Indicates if cluster level resources should be managed.
       --context string                 The name of the kubeconfig context to use
+      --disable-compression            If true, opt-out of response compression for all requests to the server
       --dry-run                        Print what will be performed (default true)
   -h, --help                           help for enable-namespaced-mode
       --insecure-skip-tls-verify       If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
@@ -37,6 +40,7 @@ argocd admin cluster namespaces enable-namespaced-mode PATTERN [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

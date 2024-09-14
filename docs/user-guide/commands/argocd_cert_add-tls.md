@@ -1,3 +1,5 @@
+# `argocd cert add-tls` Command Reference
+
 ## argocd cert add-tls
 
 Add TLS certificate data for connecting to repository server SERVERNAME
@@ -17,6 +19,7 @@ argocd cert add-tls SERVERNAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

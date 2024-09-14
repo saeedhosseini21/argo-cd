@@ -1,3 +1,5 @@
+# `argocd repo get` Command Reference
+
 ## argocd repo get
 
 Get a configured repository by URL
@@ -11,12 +13,14 @@ argocd repo get [flags]
 ```
   -h, --help             help for get
   -o, --output string    Output format. One of: json|yaml|wide|url (default "wide")
+      --project string   project of the repository
       --refresh string   Force a cache refresh on connection status , must be one of: 'hard'
 ```
 
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

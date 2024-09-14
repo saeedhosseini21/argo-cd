@@ -1,3 +1,5 @@
+# `argocd app get` Command Reference
+
 ## argocd app get
 
 Get application details
@@ -6,20 +8,57 @@ Get application details
 argocd app get APPNAME [flags]
 ```
 
+### Examples
+
+```
+  # Get basic details about the application "my-app" in wide format
+  argocd app get my-app -o wide
+  
+  # Get detailed information about the application "my-app" in YAML format
+  argocd app get my-app -o yaml
+  
+  # Get details of the application "my-app" in JSON format
+  argocd get my-app -o json
+  
+  # Get application details and include information about the current operation
+  argocd app get my-app --show-operation
+  
+  # Show application parameters and overrides
+  argocd app get my-app --show-params
+  
+  # Show application parameters and overrides for a source at position 1 under spec.sources of app my-app
+  argocd app get my-app --show-params --source-position 1
+  
+  # Refresh application data when retrieving
+  argocd app get my-app --refresh
+  
+  # Perform a hard refresh, including refreshing application data and target manifests cache
+  argocd app get my-app --hard-refresh
+  
+  # Get application details and display them in a tree format
+  argocd app get my-app --output tree
+  
+  # Get application details and display them in a detailed tree format
+  argocd app get my-app --output tree=detailed
+```
+
 ### Options
 
 ```
-      --hard-refresh     Refresh application data as well as target manifests cache
-  -h, --help             help for get
-  -o, --output string    Output format. One of: json|yaml|wide (default "wide")
-      --refresh          Refresh application data when retrieving
-      --show-operation   Show application operation
-      --show-params      Show application parameters and overrides
+  -N, --app-namespace string   Only get application from namespace
+      --hard-refresh           Refresh application data as well as target manifests cache
+  -h, --help                   help for get
+  -o, --output string          Output format. One of: json|yaml|wide|tree (default "wide")
+      --refresh                Refresh application data when retrieving
+      --show-operation         Show application operation
+      --show-params            Show application parameters and overrides
+      --source-position int    Position of the source from the list of sources of the app. Counting starts at 1. (default -1)
 ```
 
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

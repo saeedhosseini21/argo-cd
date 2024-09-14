@@ -1,3 +1,5 @@
+# `argocd proj windows enable-manual-sync` Command Reference
+
 ## argocd proj windows enable-manual-sync
 
 Enable manual sync for a sync window
@@ -10,6 +12,20 @@ Enable manual sync for a sync window. Requires ID which can be found by running 
 argocd proj windows enable-manual-sync PROJECT ID [flags]
 ```
 
+### Examples
+
+```
+
+#Enabling manual sync for a general case
+argocd proj windows enable-manual-sync PROJECT ID 
+
+#Enabling manual sync for a windows set on the default project with Id 2
+argocd proj windows enable-manual-sync default 2
+
+#Enabling manual sync with a custom message
+argocd proj windows enable-manual-sync my-app-project --message "Manual sync initiated by admin
+```
+
 ### Options
 
 ```
@@ -19,6 +35,7 @@ argocd proj windows enable-manual-sync PROJECT ID [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

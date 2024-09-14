@@ -1,9 +1,21 @@
+# `argocd account get-user-info` Command Reference
+
 ## argocd account get-user-info
 
 Get user info
 
 ```
 argocd account get-user-info [flags]
+```
+
+### Examples
+
+```
+  # Get User information for the currently logged-in user (see 'argocd login')
+  argocd account get-user-info
+  
+  # Get User information in yaml format
+  argocd account get-user-info -o yaml
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd account get-user-info [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

@@ -1,3 +1,5 @@
+# `argocd proj role remove-group` Command Reference
+
 ## argocd proj role remove-group
 
 Remove a group claim from a role within a project
@@ -15,6 +17,7 @@ argocd proj role remove-group PROJECT ROLE-NAME GROUP-CLAIM [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

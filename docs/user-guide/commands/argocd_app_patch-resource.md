@@ -1,3 +1,5 @@
+# `argocd app patch-resource` Command Reference
+
 ## argocd app patch-resource
 
 Patch resource in an application
@@ -16,12 +18,14 @@ argocd app patch-resource APPNAME [flags]
       --namespace string       Namespace
       --patch string           Patch
       --patch-type string      Which Patching strategy to use: 'application/json-patch+json', 'application/merge-patch+json', or 'application/strategic-merge-patch+json'. Defaults to 'application/merge-patch+json' (default "application/merge-patch+json")
+      --project string         The name of the application's project - specifying this allows the command to report "not found" instead of "permission denied" if the app does not exist
       --resource-name string   Name of resource
 ```
 
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

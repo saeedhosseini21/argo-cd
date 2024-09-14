@@ -1,9 +1,21 @@
+# `argocd proj list` Command Reference
+
 ## argocd proj list
 
 List projects
 
 ```
 argocd proj list [flags]
+```
+
+### Examples
+
+```
+  # List all available projects
+  argocd proj list
+  
+  # List all available projects in yaml format
+  argocd proj list -o yaml
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj list [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

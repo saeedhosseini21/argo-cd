@@ -15,7 +15,7 @@ requests before forwarding to the backend service.
 
 As proxy extension is in [Alpha][1] phase, the feature is disabled by
 default. To enable it, it is necessary to configure the feature flag
-in Argo CD command parameters. The easiest way to to properly enable
+in Argo CD command parameters. The easiest way to properly enable
 this feature flag is by adding the `server.enable.proxy.extension` key
 in the existing `argocd-cmd-params-cm`. For example:
 
@@ -32,7 +32,7 @@ data:
 Once the proxy extension is enabled, it can be configured in the main
 Argo CD configmap ([argocd-cm][2]).
 
-The example below demonstrate all possible configurations available
+The example below demonstrates all possible configurations available
 for proxy extensions:
 
 ```yaml
@@ -60,9 +60,11 @@ data:
             server: https://some-cluster
 ```
 
-If a the configuration is changed, Argo CD Server will need to be
-restarted as the proxy handlers are only registered once during the
-initialization of the server.
+Note: There is no need to restart Argo CD Server after modifiying the
+`extension.config` entry in Argo CD configmap. Changes will be
+automatically applied. A new proxy registry will be built making
+all new incoming extensions requests (`<argocd-host>/extensions/*`) to
+respect the new configuration.
 
 Every configuration entry is explained below:
 
@@ -118,7 +120,7 @@ Is the address where the extension backend must be available.
 
 If provided, the headers list will be added on all outgoing requests
 for this service config. Existing headers in the incoming request with
-the same name will be overriden by the one in this list. Reserved header
+the same name will be overridden by the one in this list. Reserved header
 names will be ignored (see the [headers](#incoming-request-headers) below).
 
 #### `extensions.backend.services.headers.name` (*string*)
@@ -261,6 +263,14 @@ it is not empty string is the Application resource.
 Note that additional pre-configured headers can be added to outgoing
 request. See [backend service headers](#extensionsbackendservicesheaders-list)
 section for more details.
+
+#### `Argocd-Username`
+
+Will be populated with the username logged in Argo CD.
+
+#### `Argocd-User-Groups`
+
+Will be populated with the 'groups' claim from the user logged in Argo CD.
 
 ### Multi Backend Use-Case
 

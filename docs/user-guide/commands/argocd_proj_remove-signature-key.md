@@ -1,9 +1,18 @@
+# `argocd proj remove-signature-key` Command Reference
+
 ## argocd proj remove-signature-key
 
 Remove GnuPG signature key from project
 
 ```
 argocd proj remove-signature-key PROJECT KEY-ID [flags]
+```
+
+### Examples
+
+```
+  # Remove GnuPG signature key KEY-ID from project PROJECT
+  argocd proj remove-signature-key PROJECT KEY-ID
 ```
 
 ### Options
@@ -15,6 +24,7 @@ argocd proj remove-signature-key PROJECT KEY-ID [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

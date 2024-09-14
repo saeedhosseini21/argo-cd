@@ -1,9 +1,43 @@
+# `argocd proj role delete-token` Command Reference
+
 ## argocd proj role delete-token
 
 Delete a project token
 
 ```
 argocd proj role delete-token PROJECT ROLE-NAME ISSUED-AT [flags]
+```
+
+### Examples
+
+```
+#Create project test-project
+$ argocd proj create test-project
+
+# Create a role associated with test-project
+$ argocd proj role create test-project test-role
+Role 'test-role' created
+
+# Create test-role associated with test-project
+$ argocd proj role create-token test-project test-role
+Create token succeeded for proj:test-project:test-role.
+  ID: c312450e-12e1-4e0d-9f65-fac9cb027b32
+  Issued At: 2023-10-08T13:58:57+01:00
+  Expires At: Never
+  Token: xxx
+
+# Get test-role id to input into the delete-token command below
+$ argocd proj role get test-project test-role
+Role Name:     test-role
+Description:
+Policies:
+p, proj:test-project:test-role, projects, get, test-project, allow
+JWT Tokens:
+ID          ISSUED-AT                                  EXPIRES-AT
+1696769937  2023-10-08T13:58:57+01:00 (6 minutes ago)  <none>
+
+$ argocd proj role delete-token test-project test-role 1696769937
+
 ```
 
 ### Options
@@ -15,6 +49,7 @@ argocd proj role delete-token PROJECT ROLE-NAME ISSUED-AT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

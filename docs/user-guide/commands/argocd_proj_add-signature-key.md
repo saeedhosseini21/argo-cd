@@ -1,9 +1,18 @@
+# `argocd proj add-signature-key` Command Reference
+
 ## argocd proj add-signature-key
 
 Add GnuPG signature key to project
 
 ```
 argocd proj add-signature-key PROJECT KEY-ID [flags]
+```
+
+### Examples
+
+```
+  # Add GnuPG signature key KEY-ID to project PROJECT
+  argocd proj add-signature-key PROJECT KEY-ID
 ```
 
 ### Options
@@ -15,6 +24,7 @@ argocd proj add-signature-key PROJECT KEY-ID [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

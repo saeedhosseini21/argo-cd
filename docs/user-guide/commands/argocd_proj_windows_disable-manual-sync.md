@@ -1,3 +1,5 @@
+# `argocd proj windows disable-manual-sync` Command Reference
+
 ## argocd proj windows disable-manual-sync
 
 Disable manual sync for a sync window
@@ -10,6 +12,17 @@ Disable manual sync for a sync window. Requires ID which can be found by running
 argocd proj windows disable-manual-sync PROJECT ID [flags]
 ```
 
+### Examples
+
+```
+
+#Disable manual sync for a sync window for the Project 
+argocd proj windows disable-manual-sync PROJECT ID 
+
+#Disabling manual sync for a windows set on the default project with Id 0
+argocd proj windows disable-manual-sync default 0
+```
+
 ### Options
 
 ```
@@ -19,6 +32,7 @@ argocd proj windows disable-manual-sync PROJECT ID [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

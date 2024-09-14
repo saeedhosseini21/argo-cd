@@ -1,9 +1,21 @@
+# `argocd proj remove-orphaned-ignore` Command Reference
+
 ## argocd proj remove-orphaned-ignore
 
 Remove a resource from orphaned ignore list
 
 ```
-argocd proj remove-orphaned-ignore PROJECT GROUP KIND NAME [flags]
+argocd proj remove-orphaned-ignore PROJECT GROUP KIND [flags]
+```
+
+### Examples
+
+```
+  # Remove a resource of the specified GROUP and KIND from orphaned ignore list on the project with name PROJECT
+  argocd proj remove-orphaned-ignore PROJECT GROUP KIND
+  
+  # Remove resources of the specified GROUP and KIND using a NAME pattern from orphaned ignore list on the project with name PROJECT
+  argocd proj remove-orphaned-ignore PROJECT GROUP KIND --name NAME
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj remove-orphaned-ignore PROJECT GROUP KIND NAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

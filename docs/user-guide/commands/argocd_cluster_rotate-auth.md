@@ -1,3 +1,5 @@
+# `argocd cluster rotate-auth` Command Reference
+
 ## argocd cluster rotate-auth
 
 argocd cluster rotate-auth SERVER/NAME
@@ -22,6 +24,7 @@ argocd cluster rotate-auth cluster-name
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

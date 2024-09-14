@@ -1,9 +1,18 @@
+# `argocd proj edit` Command Reference
+
 ## argocd proj edit
 
 Edit project
 
 ```
 argocd proj edit PROJECT [flags]
+```
+
+### Examples
+
+```
+  # Edit the information on project with name PROJECT
+  argocd proj edit PROJECT
 ```
 
 ### Options
@@ -15,6 +24,7 @@ argocd proj edit PROJECT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

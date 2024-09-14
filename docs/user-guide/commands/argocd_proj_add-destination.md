@@ -1,9 +1,21 @@
+# `argocd proj add-destination` Command Reference
+
 ## argocd proj add-destination
 
 Add project destination
 
 ```
 argocd proj add-destination PROJECT SERVER/NAME NAMESPACE [flags]
+```
+
+### Examples
+
+```
+  # Add project destination using a server URL (SERVER) in the specified namespace (NAMESPACE) on the project with name PROJECT
+  argocd proj add-destination PROJECT SERVER NAMESPACE
+  
+  # Add project destination using a server name (NAME) in the specified namespace (NAMESPACE) on the project with name PROJECT
+  argocd proj add-destination PROJECT NAME NAMESPACE --name
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj add-destination PROJECT SERVER/NAME NAMESPACE [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

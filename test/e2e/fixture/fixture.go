@@ -231,7 +231,6 @@ func init() {
 	for scanner.Scan() {
 		testsRun[scanner.Text()] = true
 	}
-
 }
 
 func loginAs(username, password string) {
@@ -568,7 +567,7 @@ func EnsureCleanState(t *testing.T, opts ...TestOption) {
 	opt := newTestOption(opts...)
 	// In large scenarios, we can skip tests that already run
 	SkipIfAlreadyRun(t)
-	// Register this test after it has been run & was successfull
+	// Register this test after it has been run & was successful
 	t.Cleanup(func() {
 		RecordTestRun(t)
 	})
@@ -685,7 +684,7 @@ func EnsureCleanState(t *testing.T, opts ...TestOption) {
 	// set-up tmp repo, must have unique name
 	FailOnErr(Run("", "cp", "-Rf", opt.testdata, repoDirectory()))
 	FailOnErr(Run(repoDirectory(), "chmod", "777", "."))
-	FailOnErr(Run(repoDirectory(), "git", "init"))
+	FailOnErr(Run(repoDirectory(), "git", "init", "-b", "master"))
 	FailOnErr(Run(repoDirectory(), "git", "add", "."))
 	FailOnErr(Run(repoDirectory(), "git", "commit", "-q", "-m", "initial commit"))
 
@@ -742,21 +741,25 @@ func RunCliWithRetry(maxRetries int, args ...string) (string, error) {
 }
 
 func RunCli(args ...string) (string, error) {
-	return RunCliWithStdin("", args...)
+	return RunCliWithStdin("", false, args...)
 }
 
-func RunCliWithStdin(stdin string, args ...string) (string, error) {
+func RunCliWithStdin(stdin string, isKubeConextOnlyCli bool, args ...string) (string, error) {
 	if plainText {
 		args = append(args, "--plaintext")
 	}
 
-	args = append(args, "--server", apiServerAddress, "--auth-token", token, "--insecure")
+	// For commands executed with Kubernetes context server argument causes a conflict (for those commands server argument is for KubeAPI server), also authentication is not required
+	if !isKubeConextOnlyCli {
+		args = append(args, "--server", apiServerAddress, "--auth-token", token)
+	}
+
+	args = append(args, "--insecure")
 
 	return RunWithStdin(stdin, "", "../../dist/argocd", args...)
 }
 
 func Patch(path string, jsonPatch string) {
-
 	log.WithFields(log.Fields{"path": path, "jsonPatch": jsonPatch}).Info("patching")
 
 	filename := filepath.Join(repoDirectory(), path)
@@ -784,7 +787,7 @@ func Patch(path string, jsonPatch string) {
 		CheckError(err)
 	}
 
-	CheckError(os.WriteFile(filename, bytes, 0644))
+	CheckError(os.WriteFile(filename, bytes, 0o644))
 	FailOnErr(Run(repoDirectory(), "git", "diff"))
 	FailOnErr(Run(repoDirectory(), "git", "commit", "-am", "patch"))
 	if IsRemote() {
@@ -793,7 +796,6 @@ func Patch(path string, jsonPatch string) {
 }
 
 func Delete(path string) {
-
 	log.WithFields(log.Fields{"path": path}).Info("deleting")
 
 	CheckError(os.Remove(filepath.Join(repoDirectory(), path)))
@@ -808,11 +810,10 @@ func Delete(path string) {
 func WriteFile(path, contents string) {
 	log.WithFields(log.Fields{"path": path}).Info("adding")
 
-	CheckError(os.WriteFile(filepath.Join(repoDirectory(), path), []byte(contents), 0644))
+	CheckError(os.WriteFile(filepath.Join(repoDirectory(), path), []byte(contents), 0o644))
 }
 
 func AddFile(path, contents string) {
-
 	WriteFile(path, contents)
 
 	FailOnErr(Run(repoDirectory(), "git", "diff"))
@@ -860,7 +861,6 @@ func AddTag(name string) {
 
 // create the resource by creating using "kubectl apply", with bonus templating
 func Declarative(filename string, values interface{}) (string, error) {
-
 	bytes, err := os.ReadFile(path.Join("testdata", filename))
 	CheckError(err)
 
@@ -873,13 +873,10 @@ func Declarative(filename string, values interface{}) (string, error) {
 }
 
 func CreateSubmoduleRepos(repoType string) {
-	oldEnv := os.Getenv("GIT_ALLOW_PROTOCOL")
-	CheckError(os.Setenv("GIT_ALLOW_PROTOCOL", "file"))
-
 	// set-up submodule repo
 	FailOnErr(Run("", "cp", "-Rf", "testdata/git-submodule/", submoduleDirectory()))
 	FailOnErr(Run(submoduleDirectory(), "chmod", "777", "."))
-	FailOnErr(Run(submoduleDirectory(), "git", "init"))
+	FailOnErr(Run(submoduleDirectory(), "git", "init", "-b", "master"))
 	FailOnErr(Run(submoduleDirectory(), "git", "add", "."))
 	FailOnErr(Run(submoduleDirectory(), "git", "commit", "-q", "-m", "initial commit"))
 
@@ -891,9 +888,20 @@ func CreateSubmoduleRepos(repoType string) {
 	// set-up submodule parent repo
 	FailOnErr(Run("", "mkdir", submoduleParentDirectory()))
 	FailOnErr(Run(submoduleParentDirectory(), "chmod", "777", "."))
-	FailOnErr(Run(submoduleParentDirectory(), "git", "init"))
+	FailOnErr(Run(submoduleParentDirectory(), "git", "init", "-b", "master"))
 	FailOnErr(Run(submoduleParentDirectory(), "git", "add", "."))
-	FailOnErr(Run(submoduleParentDirectory(), "git", "submodule", "add", "-b", "master", "../submodule.git", "submodule/test"))
+	if IsRemote() {
+		FailOnErr(Run(submoduleParentDirectory(), "git", "submodule", "add", "-b", "master", os.Getenv("ARGOCD_E2E_GIT_SERVICE_SUBMODULE"), "submodule/test"))
+	} else {
+		oldAllowProtocol, isAllowProtocolSet := os.LookupEnv("GIT_ALLOW_PROTOCOL")
+		CheckError(os.Setenv("GIT_ALLOW_PROTOCOL", "file"))
+		FailOnErr(Run(submoduleParentDirectory(), "git", "submodule", "add", "-b", "master", "../submodule.git", "submodule/test"))
+		if isAllowProtocolSet {
+			CheckError(os.Setenv("GIT_ALLOW_PROTOCOL", oldAllowProtocol))
+		} else {
+			CheckError(os.Unsetenv("GIT_ALLOW_PROTOCOL"))
+		}
+	}
 	if repoType == "ssh" {
 		FailOnErr(Run(submoduleParentDirectory(), "git", "config", "--file=.gitmodules", "submodule.submodule/test.url", RepoURL(RepoURLTypeSSHSubmodule)))
 	} else if repoType == "https" {
@@ -906,8 +914,6 @@ func CreateSubmoduleRepos(repoType string) {
 		FailOnErr(Run(submoduleParentDirectory(), "git", "remote", "add", "origin", os.Getenv("ARGOCD_E2E_GIT_SERVICE_SUBMODULE_PARENT")))
 		FailOnErr(Run(submoduleParentDirectory(), "git", "push", "origin", "master", "-f"))
 	}
-
-	CheckError(os.Setenv("GIT_ALLOW_PROTOCOL", oldEnv))
 }
 
 func RemoveSubmodule() {
@@ -932,8 +938,8 @@ func RestartRepoServer() {
 		if prefix != "" {
 			workload = prefix + "-repo-server"
 		}
-		FailOnErr(Run("", "kubectl", "rollout", "restart", "deployment", workload))
-		FailOnErr(Run("", "kubectl", "rollout", "status", "deployment", workload))
+		FailOnErr(Run("", "kubectl", "rollout", "-n", TestNamespace(), "restart", "deployment", workload))
+		FailOnErr(Run("", "kubectl", "rollout", "-n", TestNamespace(), "status", "deployment", workload))
 		// wait longer to avoid error on s390x
 		time.Sleep(10 * time.Second)
 	}
@@ -949,8 +955,8 @@ func RestartAPIServer() {
 		if prefix != "" {
 			workload = prefix + "-server"
 		}
-		FailOnErr(Run("", "kubectl", "rollout", "restart", "deployment", workload))
-		FailOnErr(Run("", "kubectl", "rollout", "status", "deployment", workload))
+		FailOnErr(Run("", "kubectl", "rollout", "-n", TestNamespace(), "restart", "deployment", workload))
+		FailOnErr(Run("", "kubectl", "rollout", "-n", TestNamespace(), "status", "deployment", workload))
 	}
 }
 
@@ -995,7 +1001,7 @@ func RecordTestRun(t *testing.T) {
 		return
 	}
 	log.Infof("Registering test execution at %s", rf)
-	f, err := os.OpenFile(rf, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(rf, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		t.Fatalf("could not open record file %s: %v", rf, err)
 	}
@@ -1008,4 +1014,12 @@ func RecordTestRun(t *testing.T) {
 	if _, err := f.WriteString(fmt.Sprintf("%s\n", t.Name())); err != nil {
 		t.Fatalf("could not write to %s: %v", rf, err)
 	}
+}
+
+func GetApiServerAddress() string {
+	return apiServerAddress
+}
+
+func GetToken() string {
+	return token
 }

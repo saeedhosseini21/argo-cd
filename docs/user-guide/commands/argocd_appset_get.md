@@ -1,9 +1,18 @@
+# `argocd appset get` Command Reference
+
 ## argocd appset get
 
 Get ApplicationSet details
 
 ```
 argocd appset get APPSETNAME [flags]
+```
+
+### Examples
+
+```
+  # Get ApplicationSets
+  argocd appset get APPSETNAME
 ```
 
 ### Options
@@ -17,6 +26,7 @@ argocd appset get APPSETNAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

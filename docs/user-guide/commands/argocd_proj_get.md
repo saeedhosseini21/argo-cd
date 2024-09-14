@@ -1,9 +1,21 @@
+# `argocd proj get` Command Reference
+
 ## argocd proj get
 
 Get project details
 
 ```
 argocd proj get PROJECT [flags]
+```
+
+### Examples
+
+```
+  # Get details from project PROJECT
+  argocd proj get PROJECT
+  
+  # Get details from project PROJECT in yaml format
+  argocd proj get PROJECT -o yaml
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj get PROJECT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

@@ -1,9 +1,24 @@
+# `argocd context` Command Reference
+
 ## argocd context
 
 Switch between contexts
 
 ```
 argocd context [CONTEXT] [flags]
+```
+
+### Examples
+
+```
+# List Argo CD Contexts
+argocd context
+
+# Switch Argo CD context
+argocd context cd.argoproj.io
+
+# Delete Argo CD context
+argocd context cd.argoproj.io --delete
 ```
 
 ### Options
@@ -16,6 +31,7 @@ argocd context [CONTEXT] [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

@@ -1,9 +1,18 @@
+# `argocd proj allow-cluster-resource` Command Reference
+
 ## argocd proj allow-cluster-resource
 
 Adds a cluster-scoped API resource to the allow list and removes it from deny list
 
 ```
 argocd proj allow-cluster-resource PROJECT GROUP KIND [flags]
+```
+
+### Examples
+
+```
+  # Adds a cluster-scoped API resource with specified GROUP and KIND to the allow list and removes it from deny list for project PROJECT
+  argocd proj allow-cluster-resource PROJECT GROUP KIND
 ```
 
 ### Options
@@ -16,6 +25,7 @@ argocd proj allow-cluster-resource PROJECT GROUP KIND [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

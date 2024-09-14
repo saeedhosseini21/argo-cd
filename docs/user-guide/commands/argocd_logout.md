@@ -1,3 +1,5 @@
+# `argocd logout` Command Reference
+
 ## argocd logout
 
 Log out from Argo CD
@@ -10,6 +12,15 @@ Log out from Argo CD
 argocd logout CONTEXT [flags]
 ```
 
+### Examples
+
+```
+# To log out of argocd
+$ argocd logout
+# This can be helpful for security reasons or when you want to switch between different Argo CD contexts or accounts.
+
+```
+
 ### Options
 
 ```
@@ -19,6 +30,7 @@ argocd logout CONTEXT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

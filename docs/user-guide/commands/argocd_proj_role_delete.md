@@ -1,9 +1,17 @@
+# `argocd proj role delete` Command Reference
+
 ## argocd proj role delete
 
 Delete a project role
 
 ```
 argocd proj role delete PROJECT ROLE-NAME [flags]
+```
+
+### Examples
+
+```
+$ argocd proj role delete test-project test-role
 ```
 
 ### Options
@@ -15,6 +23,7 @@ argocd proj role delete PROJECT ROLE-NAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

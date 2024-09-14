@@ -1,9 +1,21 @@
+# `argocd proj role list` Command Reference
+
 ## argocd proj role list
 
 List all the roles in a project
 
 ```
 argocd proj role list PROJECT [flags]
+```
+
+### Examples
+
+```
+  # This command will list all the roles in argocd-project in a default table format.
+  argocd proj role list PROJECT
+  
+  # List the roles in the project in formats like json, yaml, wide, or name.
+  argocd proj role list PROJECT --output json
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj role list PROJECT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

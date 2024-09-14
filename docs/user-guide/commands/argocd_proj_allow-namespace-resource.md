@@ -1,9 +1,18 @@
+# `argocd proj allow-namespace-resource` Command Reference
+
 ## argocd proj allow-namespace-resource
 
 Removes a namespaced API resource from the deny list or add a namespaced API resource to the allow list
 
 ```
 argocd proj allow-namespace-resource PROJECT GROUP KIND [flags]
+```
+
+### Examples
+
+```
+  # Removes a namespaced API resource with specified GROUP and KIND from the deny list or add a namespaced API resource to the allow list for project PROJECT
+  argocd proj allow-namespace-resource PROJECT GROUP KIND
 ```
 
 ### Options
@@ -16,6 +25,7 @@ argocd proj allow-namespace-resource PROJECT GROUP KIND [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

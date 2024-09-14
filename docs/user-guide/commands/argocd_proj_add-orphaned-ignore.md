@@ -1,9 +1,21 @@
+# `argocd proj add-orphaned-ignore` Command Reference
+
 ## argocd proj add-orphaned-ignore
 
 Add a resource to orphaned ignore list
 
 ```
 argocd proj add-orphaned-ignore PROJECT GROUP KIND [flags]
+```
+
+### Examples
+
+```
+  # Add a resource of the specified GROUP and KIND to orphaned ignore list on the project with name PROJECT
+  argocd proj add-orphaned-ignore PROJECT GROUP KIND
+  
+  # Add resources of the specified GROUP and KIND using a NAME pattern to orphaned ignore list on the project with name PROJECT
+  argocd proj add-orphaned-ignore PROJECT GROUP KIND --name NAME
 ```
 
 ### Options
@@ -16,6 +28,7 @@ argocd proj add-orphaned-ignore PROJECT GROUP KIND [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

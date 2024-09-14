@@ -1,9 +1,25 @@
+# `argocd proj windows list` Command Reference
+
 ## argocd proj windows list
 
 List project sync windows
 
 ```
 argocd proj windows list PROJECT [flags]
+```
+
+### Examples
+
+```
+
+#List project windows
+argocd proj windows list PROJECT
+
+#List project windows in yaml format
+argocd proj windows list PROJECT -o yaml
+
+#List project windows info for a project name (test-project)
+argocd proj windows list test-project
 ```
 
 ### Options
@@ -16,6 +32,7 @@ argocd proj windows list PROJECT [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

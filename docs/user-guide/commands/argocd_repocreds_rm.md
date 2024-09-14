@@ -1,9 +1,18 @@
+# `argocd repocreds rm` Command Reference
+
 ## argocd repocreds rm
 
 Remove repository credentials
 
 ```
 argocd repocreds rm CREDSURL [flags]
+```
+
+### Examples
+
+```
+  # Remove credentials for the repositories with URL https://git.example.com/repos
+  argocd repocreds rm https://git.example.com/repos/
 ```
 
 ### Options
@@ -15,6 +24,7 @@ argocd repocreds rm CREDSURL [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

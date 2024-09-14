@@ -1,9 +1,24 @@
+# `argocd gpg get` Command Reference
+
 ## argocd gpg get
 
 Get the GPG public key with ID <KEYID> from the server
 
 ```
 argocd gpg get KEYID [flags]
+```
+
+### Examples
+
+```
+  # Get a GPG public key with the specified KEYID in wide format (default).
+  argocd gpg get KEYID
+  
+  # Get a GPG public key with the specified KEYID in JSON format.
+  argocd gpg get KEYID -o json
+  
+  # Get a GPG public key with the specified KEYID in YAML format.
+  argocd gpg get KEYID -o yaml
 ```
 
 ### Options
@@ -16,6 +31,7 @@ argocd gpg get KEYID [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

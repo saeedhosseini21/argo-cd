@@ -1,3 +1,5 @@
+# `argocd app delete-resource` Command Reference
+
 ## argocd app delete-resource
 
 Delete resource in an application
@@ -10,18 +12,20 @@ argocd app delete-resource APPNAME [flags]
 
 ```
       --all                    Indicates whether to patch multiple matching of resources
-      --force                  Indicates whether to orphan the dependents of the deleted resource
+      --force                  Indicates whether to force delete the resource
       --group string           Group
   -h, --help                   help for delete-resource
       --kind string            Kind
       --namespace string       Namespace
-      --orphan                 Indicates whether to force delete the resource
+      --orphan                 Indicates whether to orphan the dependents of the deleted resource
+      --project string         The name of the application's project - specifying this allows the command to report "not found" instead of "permission denied" if the app does not exist
       --resource-name string   Name of resource
 ```
 
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

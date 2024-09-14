@@ -1,9 +1,26 @@
+# `argocd proj role get` Command Reference
+
 ## argocd proj role get
 
 Get the details of a specific role
 
 ```
 argocd proj role get PROJECT ROLE-NAME [flags]
+```
+
+### Examples
+
+```
+$ argocd proj role get test-project test-role
+Role Name:     test-role
+Description:
+Policies:
+p, proj:test-project:test-role, projects, get, test-project, allow
+JWT Tokens:
+ID          ISSUED-AT                                  EXPIRES-AT
+1696774900  2023-10-08T15:21:40+01:00 (4 minutes ago)  <none>
+1696759698  2023-10-08T11:08:18+01:00 (4 hours ago)    <none>
+
 ```
 
 ### Options
@@ -15,6 +32,7 @@ argocd proj role get PROJECT ROLE-NAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

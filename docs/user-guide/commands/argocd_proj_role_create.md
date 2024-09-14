@@ -1,9 +1,18 @@
+# `argocd proj role create` Command Reference
+
 ## argocd proj role create
 
 Create a project role
 
 ```
 argocd proj role create PROJECT ROLE-NAME [flags]
+```
+
+### Examples
+
+```
+  # Create a project role in the "my-project" project with the name "my-role".
+  argocd proj role create my-project my-role --description "My project role description"
 ```
 
 ### Options
@@ -16,6 +25,7 @@ argocd proj role create PROJECT ROLE-NAME [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

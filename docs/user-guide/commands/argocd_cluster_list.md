@@ -1,9 +1,33 @@
+# `argocd cluster list` Command Reference
+
 ## argocd cluster list
 
 List configured clusters
 
 ```
 argocd cluster list [flags]
+```
+
+### Examples
+
+```
+
+# List Clusters in Default "Wide" Format
+argocd cluster list
+
+# List Cluster via specifying the server
+argocd cluster list --server <ARGOCD_SERVER_ADDRESS>
+
+# List Clusters in JSON Format
+argocd cluster list -o json --server <ARGOCD_SERVER_ADDRESS>
+
+# List Clusters in YAML Format
+argocd cluster list -o yaml --server <ARGOCD_SERVER_ADDRESS>
+
+# List Clusters that have been added to your Argo CD 
+argocd cluster list -o server <ARGOCD_SERVER_ADDRESS>
+
+
 ```
 
 ### Options
@@ -16,6 +40,7 @@ argocd cluster list [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

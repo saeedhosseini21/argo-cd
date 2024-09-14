@@ -1,9 +1,18 @@
+# `argocd app actions run` Command Reference
+
 ## argocd app actions run
 
 Runs an available action on resource(s)
 
 ```
 argocd app actions run APPNAME ACTION [flags]
+```
+
+### Examples
+
+```
+  # Run an available action for an application
+  argocd app actions run APPNAME ACTION --kind KIND [--resource-name RESOURCE] [--namespace NAMESPACE] [--group GROUP]
 ```
 
 ### Options
@@ -20,6 +29,7 @@ argocd app actions run APPNAME ACTION [flags]
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file

@@ -1,3 +1,5 @@
+# `argocd account get` Command Reference
+
 ## argocd account get
 
 Get account details
@@ -27,6 +29,7 @@ argocd account get --account <account-name>
 ### Options inherited from parent commands
 
 ```
+      --argocd-context string           The name of the Argo-CD server context to use
       --auth-token string               Authentication token
       --client-crt string               Client certificate file
       --client-crt-key string           Client certificate key file
